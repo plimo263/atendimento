@@ -1,0 +1,20 @@
+CACHE MANIFEST 
+# 2017-08-15 08:27
+CACHE:
+/js/atendimento.js
+/atendimento
+/imagens/sem_foto.png
+/css/estilo.css
+/js/javascript.js
+/js/visao_html.js
+/js/touchPunch.js
+/js/jquery-ui.min.js
+/js/bootstrap.min.js
+/js/jquery3.1.0.min.js
+/css/bootstrap.min.css
+
+FALLBACK:
+http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js /js/bootstrap.min.js
+https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js /js/jquery3.1.0.min.js
+
+http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css /css/bootstrap.min.css

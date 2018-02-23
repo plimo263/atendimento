@@ -1,0 +1,17 @@
+@charset="UTF-8";
+ul.menu { list-style-image: url('../imagens/icone_li.png');
+    font-weight: bold; } ul.submenu {display: none; }
+/* Imagens na parte superior direita do menu */
+.imagens img.ativa { display: block; } .imagens img { display: none; } .ui-accordion-header{ background:black; }
+
+	#naFila, #emAtendimento {
+		position: relative;
+		width: 30vw;
+		height: 50vh;
+		/*border: 1px solid black;*/
+	}
+
+	img {
+		cursor:pointer;
+		margin:2px;
+	}
