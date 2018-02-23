@@ -35,4 +35,6 @@ senha: $ODamemodb
 
 Pronto, terá acesso a parte inicial do aplicativo, poderá criar usuarios, atribuir menus, criar vendedores, divulgadores e outras coisas mais.
 
+# ATENÇÃO
 
+Caso deseje usar uma logo da sua empresa substitua o arquivo logo_cabe2.png pela logo da sua empresa.
