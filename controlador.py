@@ -26,16 +26,32 @@ VERSÃO  DATA         OBSERVACOES                                               
 # Modulos a serem importados
 from bottle import run, route, request, response, static_file, redirect
 from datetime import datetime
-import VisaoHTML, Modelo, time, json, os, re, string, shutil, math, subprocess
+import VisaoHTML, Modelo, time, json, os, re, string, shutil, math, subprocess, platform
 from openpyxl import Workbook
 from PIL import Image
 
+if platform.sys.platform.lower() == 'linux':
 
-### Cabecalhos de uso para montar o layout do site relatorio.
-cabe = '_template/adm_cabecalho.tpl'
-roda = '_template/adm_rodape.tpl'
-erro_cabe = '_template/cabe_negado.tpl'
-erro_roda = '_template/roda_negado.tpl'
+	### Cabecalhos de uso para montar o layout do site relatorio.
+	cabe = '_template/adm_cabecalho.tpl'
+	roda = '_template/adm_rodape.tpl'
+	erro_cabe = '_template/cabe_negado.tpl'
+	erro_roda = '_template/roda_negado.tpl'
+	dir_backupdb = 'banco_de_dados/bkp'
+	tpl_login = '_template/login.tpl'
+	tpl_roda_login = '_template/login_roda.tpl'
+	dir_salva_imagem = '_imagem/'
+else:
+	### Cabecalhos de uso para montar o layout do site relatorio.
+	cabe = '_template\\adm_cabecalho.tpl'
+	roda = '_template\\adm_rodape.tpl'
+	erro_cabe = '_template\\cabe_negado.tpl'
+	erro_roda = '_template\\roda_negado.tpl'
+	dir_backupdb = 'banco_de_dados\\bkp'
+	tpl_login = '_template\\login.tpl'
+	tpl_roda_login = '_template\\login_roda.tpl'
+	dir_salva_imagem = '_imagem\\'
+
 
 ## Um array com cores para os graficos
 cores = ['red','green','blue','magenta', 'yellow', 'black', 'cyan', 'aqua', 'chocolate', 'cornsilk', 'gray', 'orange', 'pink']
@@ -63,13 +79,13 @@ def css(filename):
 ##  Pagina para armazenar o backup da base de dados mysql
 @route('/backup/<filename:re:.*>')
 def backup(filename):
-	return static_file(filename, root='banco_de_dados/bkp')
+	return static_file(filename, root=dir_backupdb)
 
 
 #### SE O USUARIO TIVER COOKIES REDIRECIONAR PARA /logado, SENAO EXIBIR TELA DE LOGIN
 @route('/', method='GET')
 def login():
-    pag = VisaoHTML.Pagina('_template/login.tpl', '_template/login_roda.tpl')
+    pag = VisaoHTML.Pagina(tpl_login, tpl_roda_login)
     if request.get_cookie('id'):
         redirect('/logado')
     
@@ -989,6 +1005,7 @@ def atendimento():
 	pag.setCorpo(corpo)
 
 	return pag.getPagina()
+
 @route('/atendimento', method = 'POST')
 def valAtendimento():
 	## Colunas com as informacoes dos atendimentos, suas datas
@@ -1732,7 +1749,7 @@ def val_cadastro_vendedor():
 	#TENTA SALVAR A IMAGEM, CASO NAO CONSIGA NAO SALVA NADA
 	try:
 		# INSERINDO A IMAGEM DO VENDEDOR
-		foto.save('_imagem/'+nomeImagem)
+		foto.save(dir_salva_imagem+nomeImagem)
 	except IOError:
 		pass
 	except AttributeError:
@@ -1765,7 +1782,7 @@ def excluir_vendedor():
 	## Recuperar local da imagem
 	SQLIMAGEM = "SELECT imagem FROM vendedor WHERE id_vendedor = %d " % (int(ID))
 	c = Modelo.Consulta(SQLIMAGEM, Modelo.my_usuario, Modelo.my_senha, Modelo.my_banco, Modelo.my_servidor, 'mysql')
-	imagem = c.getRegistros()[0][0].replace('/imagens/', '_imagem/')
+	imagem = c.getRegistros()[0][0].replace('/imagens/', dir_salva_imagem)
 	if 'sem_foto' in imagem:
 		pass
 	else:
@@ -1797,7 +1814,7 @@ def val_atualiza_imagem_vendedor():
 	## SPLITAMOS O NOME DO ARQUIVO E A EXTENSAO
 	nome, ext = os.path.splitext(imagem.filename);
 	nomeClassificado = str(ID)+str(ext)
-	caminho = '_imagem/'+nomeClassificado
+	caminho = dir_salva_imagem+nomeClassificado
 	#TENTA SALVAR A IMAGEM
 	try:
 		# INSERINDO A IMAGEM DO VENDEDOR
