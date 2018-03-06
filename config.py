@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
 # Variaveis para conexao do banco de dados MySQL
-MY_USUARIO = 'root'
-MY_SENHA = 'marcos'
-MY_BANCO = 'atendimento'
-MY_SERVIDOR = 'localhost'
+MY_USUARIO = ''
+MY_SENHA = ''
+MY_BANCO = ''
+MY_SERVIDOR = ''
