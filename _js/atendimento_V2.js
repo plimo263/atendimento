@@ -337,7 +337,7 @@ Loja.prototype.iniciaQuestionario = function(numPerg){
 			btRetorno.addAtributo('style="display:inline-block;background-color:#8B8989;color:white;font-weight:bold;margin-right:5em"'); // Ajustando o botao no modal
 			btDivul.addAtributo('style="display:inline-block;background-color:#8B8989;color:white;font-weight:bold;margin-right:5em"'); // Adicionando atributo no modal
 			// VERIFICANDO QUANDO O NAVEGADOR É UM ANDROID E QUANDO NAO É PARA DETERMINAR A MARGIN DO RETORNO
-			if(navigator.appVersion.toLocaleLowerCase().search('android') == -1){
+			if(navigator.appVersion.toLocaleLowerCase().search('android') == -1 || navigator.appVersion.toLocaleLowerCase().search('iphone') == -1){
 				$('#retornar').css({"margin-right":"6.3em"}); // Quando tiver quatro campos no rodape, ajustar o retornar para um recuo de 6.3em
 			} else {
 				$('#retornar').css({"margin-right":"8em"});
@@ -349,7 +349,7 @@ Loja.prototype.iniciaQuestionario = function(numPerg){
 			btDadosDoCLiente.addAtributo('style="display:inline-block;background-color:#8B8989;color:white;font-weight:bold;margin-right:4.3em"'); // Atributos para posicionar o botao no modal
 			btDivul.addAtributo('style="display:inline-block;background-color:#8B8989;color:white;font-weight:bold;margin-right:3.5em"'); // Adicionando atributo no modal
 			// VERIFICANDO QUANDO O NAVEGADOR E UM ANDROID PARA DETERMINAR A MARGIN DO BOTAO RETORNAR
-			if(navigator.appVersion.toLocaleLowerCase().search('android') == -1){
+			if(navigator.appVersion.toLocaleLowerCase().search('android') == -1 || navigator.appVersion.toLocaleLowerCase().search('android') == -1){
 				$('#retornar').css({"margin-right":"4em"}); // Quando tiver quatro campos no rodape, ajustar o retornar para um recuo de 6.3em
 			} else {
 				$('#retornar').css({"margin-right":"5.7em"});
@@ -704,7 +704,7 @@ function enviarImagemDoVendedor(){
 
 $(document).ready(function(){
 	var navegador = navigator.userAgent.toUpperCase();
-	if((navegador.indexOf("ANDROID") == -1)){
+	if((navegador.indexOf("ANDROID") == -1) &&  (navegador.indexOf("IPHONE") == -1) && (navegador.indexOf("IPAD") == -1)) {
 		return false;
 	}
 	$('#baixar').html('<a href=# id="atualizaImagemVendedor"><span class="text-danger glyphicon glyphicon-camera"></span> IMAGEM </a>').removeClass('loja01').fadeIn();
