@@ -16,6 +16,9 @@ $("#incluir").click(function(e){
     } else if($('#cod_vendedor').val() == "" || $('#cod_vendedor').val() == null){
     	alert('Defina um codigo de vendedor para o vendedor a ser cadastrado');
     	return false;
+    } else if(isNaN($('#cod_vendedor').val())){
+      alert('São aceitos somente números.');
+      return false;
     }
 
 	cod_vendedor = $('#cod_vendedor').val();
